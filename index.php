@@ -1,10 +1,12 @@
 <?php
+
 require_once('functions.php');
+$aaa = new CreateDeck;
 
 ?>
 <html lang="ja">
 <head>
-    <title>BlackJack</title>
+    <title>Blackack</title>
 </head>
 <body>
     <h1>BlackJack</h1>
