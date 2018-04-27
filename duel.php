@@ -1,6 +1,7 @@
 <?php
+
 $deck = $_POST['deck'];
-var_dump($deck);
+
 ?>
 
 <html lang="ja">

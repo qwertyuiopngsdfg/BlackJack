@@ -9,5 +9,15 @@ foreach ($ranks as $rank) {
         $deck[] = $rank . 'の' . $num;
     }
 }
-
 shuffle($deck);
+
+//create file
+$pass = getcwd();
+$j = 0;
+do {
+    $j++;
+    $file_name = $pass . '/csv/' . date('Y-m-d') . '(' . $j . ')' . '.csv';
+} while (file_exists($file_name));
+touch($file_name);
+
+//write the deck in the text
