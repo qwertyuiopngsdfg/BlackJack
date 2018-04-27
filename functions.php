@@ -11,13 +11,13 @@ foreach ($ranks as $rank) {
 }
 shuffle($deck);
 
-//create file
+//write the deck in the text
 $pass = getcwd();
 $j = 0;
 do {
     $j++;
     $file_name = $pass . '/csv/' . date('Y-m-d') . '(' . $j . ')' . '.csv';
 } while (file_exists($file_name));
-touch($file_name);
 
-//write the deck in the text
+$file_handler = fopen($file_name, "w");
+fputcsv($file_handler, $deck);
