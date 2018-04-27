@@ -1,6 +1,7 @@
 <?php
 
 $deck = $_POST['deck'];
+fgetcsv();
 
 ?>
 
