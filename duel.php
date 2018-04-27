@@ -1,8 +1,6 @@
 <?php
-
-require_once('functions.php');
-$i = 0;
-
+$deck = $_POST['deck'];
+var_dump($deck);
 ?>
 
 <html lang="ja">
@@ -16,13 +14,11 @@ $i = 0;
     <p>ディーラーの引いたカードは<?= $deck[$i]; $i++ ?>です。</p>
     <p>ディーラーの2枚目のカードはわかりません。<?php $i++; ?></p>
     <p>あなたの合計得点は<?= $point[0] + $point[1]; ?>です。</p>
-    <form action="duel.php" method="post">
+    <form action="index.php" method="get">
         <p>カードをひきますか？</p>
         <input type="radio" name="draw" value="yes">yes
-        <input type="radio" name="draw" value="no" checked>no
-        <?php foreach ($deck as $row) : ?>
-            <input type="hidden" name="deck[]" value="<?= $row ?>">
-        <?php endforeach; ?>
+        <input type="radio" name="draw" value="no">no
+        <input type="hidden" name="deck" value="<?= $deck ?>">
         <input type="submit">
     </form>
     <p>あなたの引いたカードはクラブの9です。</p>
