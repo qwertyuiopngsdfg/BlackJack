@@ -1,19 +1,21 @@
 <?php
 
 require_once('functions.php');
-$aaa = new CreateDeck;
+$i = 0;
 
 ?>
+
 <html lang="ja">
 <head>
     <title>Blackack</title>
 </head>
 <body>
     <h1>BlackJack</h1>
-    <p>あなたの引いたカードはスペードの6です。</p>
-    <p>あなたの引いたカードはダイヤの4です。</p>
-    <p>ディーラーの引いたカードはクラブの２です。</p>
-    <p>ディーラーの2枚目のカードはわかりません。</p>
+    <p>あなたの引いたカードは<?= $deck[$i]; preg_match("/[0-9]+/", $deck[$i], $num);$point[$i] = intval($num[0]); $i++;?>です。</p>
+    <p>あなたの引いたカードは<?= $deck[$i]; preg_match("/[0-9]+/", $deck[$i], $num);$point[$i] = intval($num[0]); $i++;?>です。</p>
+    <p>ディーラーの引いたカードは<?= $deck[$i]; $i++ ?>です。</p>
+    <p>ディーラーの2枚目のカードはわかりません。<?php $i++; ?></p>
+    <p>あなたの合計得点は<?= $point[0] + $point[1]h; ?>です。</p>
     <form action="index.php">
         <p>カードをひきますか？</p>
         <input type="radio" name="draw" value="yes">yes
@@ -21,7 +23,6 @@ $aaa = new CreateDeck;
         <input type="submit">
     </form>
     <p>あなたの引いたカードはクラブの9です。</p>
-    <p>あなたの合計得点は18です。</p>
     <p>カードを引きますか？</p>
     <p>あなたの合計得点は18です。</p>
     <p>ディーラーの2枚目のカードはクラブの8です。</p>
@@ -31,4 +32,3 @@ $aaa = new CreateDeck;
     <p>ブラックジャック終了！また遊んでね！！</p>
 </body>
 </html>
-

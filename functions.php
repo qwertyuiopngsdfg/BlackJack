@@ -10,3 +10,4 @@ foreach ($ranks as $rank) {
     }
 }
 
+shuffle($deck);
