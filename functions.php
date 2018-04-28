@@ -4,7 +4,20 @@ require_once('config.php');
 //create deck
 foreach ($ranks as $rank) {
     foreach ($numbers as $num) {
-        $deck[] = $rank . 'の' . $num;
+        switch ($num) {
+            case 11:
+                $deck[] = $rank . 'のJ';
+                break;
+            case 12:
+                $deck[] = $rank . 'のQ';
+                break;
+            case 13:
+                $deck[] = $rank . 'のK';
+                break;
+            default:
+                $deck[] = $rank . 'の' . $num;
+                break;
+        }
     }
 }
 shuffle($deck);

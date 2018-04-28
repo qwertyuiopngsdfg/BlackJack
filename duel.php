@@ -22,10 +22,10 @@ if ($draw_confirm == 'yes') {
 <body>
     <h1>BlackJack</h1>
     <?php if ($draw_confirm == 'no') : ?>
-        <p>あなたの引いたカードは<?= $deck[0]; preg_match("/[0-9]+/", $deck[0], $num); $u_score += intval($num[0]);?>です。</p>
-        <p>あなたの引いたカードは<?= $deck[1]; preg_match("/[0-9]+/", $deck[1], $num); $u_score += intval($num[0]);?>です。</p>
+        <p>あなたの引いたカードは<?= $deck[0]; preg_match("/[0-9]+/", $deck[0], $num) ? $u_score += intval($num[0]) : $u_score += 10;?>です。</p>
+        <p>あなたの引いたカードは<?= $deck[1]; preg_match("/[0-9]+/", $deck[1], $num) ? $u_score += intval($num[0]) : $u_score += 10;?>です。</p>
         <?php for ($count=0; $count < $i; $count++) : ?>
-            <p>あなたの引いたカードは<?= $deck[$k]; preg_match("/[0-9]+/", $deck[$k], $num); $u_score += intval($num[0]); $k++;?>です。</p>
+            <p>あなたの引いたカードは<?= $deck[$k]; preg_match("/[0-9]+/", $deck[$k], $num) ? $u_score += intval($num[0]) : $u_score += 10; $k++;?>です。</p>
         <?php endfor; ?>
         <?= 'ユーザーの合計得点は' . $u_score . 'です。' ?>
         <p>ディーラーの引いたカードは<?= $deck[2]; preg_match("/[0-9]+/", $deck[2], $num);$d_score += intval($num[0]);?>です。</p>
@@ -54,10 +54,10 @@ if ($draw_confirm == 'yes') {
         <p>ブラックジャック終了！また遊んでね！！</p>
         <?php exit; ?>
     <?php endif; ?>
-    <p>あなたの引いたカードは<?= $deck[0]; preg_match("/[0-9]+/", $deck[0], $num); $u_score = intval($num[0]);?>です。</p>
-    <p>あなたの引いたカードは<?= $deck[1]; preg_match("/[0-9]+/", $deck[1], $num); $u_score = intval($num[0]);?>です。</p>
+    <p>あなたの引いたカードは<?= $deck[0]; preg_match("/[0-9]+/", $deck[0], $num) ? $u_score += intval($num[0]) : $u_score += 10;?>です。</p>
+    <p>あなたの引いたカードは<?= $deck[1]; preg_match("/[0-9]+/", $deck[1], $num) ? $u_score += intval($num[0]) : $u_score += 10;?>です。</p>
     <?php for ($count=0; $count < $i; $count++) : ?>
-        <p>あなたの引いたカードは<?= $deck[$k]; preg_match("/[0-9]+/", $deck[$k], $num); $u_score += intval($num[0]); $k++;?>です。</p>
+        <p>あなたの引いたカードは<?= $deck[$k]; preg_match("/[0-9]+/", $deck[$k], $num) ? $u_score += intval($num[0]) : $u_score += 10; $k++;?>です。</p>
     <?php endfor; ?>
     <p>ディーラーの引いたカードは<?= $deck[2];?>です。</p>
     <p>ディーラーの2枚目のカードはわかりません。</p>
