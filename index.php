@@ -1,37 +1,26 @@
 <?php
 
 require_once('functions.php');
-$i = 0;
 
 ?>
-
 <html lang="ja">
 <head>
     <title>Blackack</title>
 </head>
 <body>
     <h1>BlackJack</h1>
-    <p>あなたの引いたカードは<?= $deck[$i]; preg_match("/[0-9]+/", $deck[$i], $num);$point[$i] = intval($num[0]); $i++;?>です。</p>
-    <p>あなたの引いたカードは<?= $deck[$i]; preg_match("/[0-9]+/", $deck[$i], $num);$point[$i] = intval($num[0]); $i++;?>です。</p>
-    <p>ディーラーの引いたカードは<?= $deck[$i]; $i++ ?>です。</p>
-    <p>ディーラーの2枚目のカードはわかりません。<?php $i++; ?></p>
-    <p>あなたの合計得点は<?= $point[0] + $point[1]; ?>です。</p>
+    <p>あなたの引いたカードは<?= $deck[0]; preg_match("/[0-9]+/", $deck[0], $num);$u_point[0] = intval($num[0]);?>です。</p>
+    <p>あなたの引いたカードは<?= $deck[1]; preg_match("/[0-9]+/", $deck[1], $num);$u_point[1] = intval($num[0]);?>です。</p>
+    <p>ディーラーの引いたカードは<?= $deck[2]; preg_match("/[0-9]+/", $deck[2], $num);$d_point[0] = intval($num[0]);?>です。</p>
+    <p>ディーラーの2枚目のカードはわかりません。<?php preg_match("/[0-9]+/", $deck[3], $num);$d_point[1] = intval($num[0]); ?></p>
+    <p>あなたの合計得点は<?= $u_point[0] + $u_point[1]; ?>です。</p>
     <form action="duel.php" method="post">
         <p>カードをひきますか？</p>
         <input type="radio" name="draw" value="yes">yes
         <input type="radio" name="draw" value="no" checked>no
-        <?php foreach ($deck as $row) : ?>
-            <input type="hidden" name="deck[]" value="<?= $row ?>">
-        <?php endforeach; ?>
+        <input type="hidden" name="filename" value="<?= $file_name ?>">
+        <input type="hidden" name="draw_count" value="4">
         <input type="submit">
     </form>
-    <p>あなたの引いたカードはクラブの9です。</p>
-    <p>カードを引きますか？</p>
-    <p>あなたの合計得点は18です。</p>
-    <p>ディーラーの2枚目のカードはクラブの8です。</p>
-    <p>ディーラーの3枚目のカードは７です。</p>
-    <p>ディーラーの合計得点は17です。</p>
-    <p>△プレイヤーの勝ちです△</p>
-    <p>ブラックジャック終了！また遊んでね！！</p>
 </body>
 </html>

@@ -10,10 +10,10 @@ foreach ($ranks as $rank) {
 shuffle($deck);
 
 //write the deck in the text
-$j = 0;
+$i = 0;
 do {
-    $j++;
-    $file_name = BASE_PASS . '/csv/' . date('Y-m-d') . '(' . $j . ')' . '.csv';
+    $i++;
+    $file_name = BASE_PASS . '/csv/' . date('Y-m-d') . '(' . $i . ')' . '.csv';
 } while (file_exists($file_name));
 
 $file_handler = fopen($file_name, "w");
