@@ -28,10 +28,10 @@ if ($draw_confirm == 'yes') {
             <p>あなたの引いたカードは<?= $deck[$k]; preg_match("/[0-9]+/", $deck[$k], $num) ? $u_score += intval($num[0]) : $u_score += 10; $k++;?>です。</p>
         <?php endfor; ?>
         <?= 'ユーザーの合計得点は' . $u_score . 'です。' ?>
-        <p>ディーラーの引いたカードは<?= $deck[2]; preg_match("/[0-9]+/", $deck[2], $num);$d_score += intval($num[0]);?>です。</p>
-        <p>ディーラーの引いたカードは<?= $deck[3]; preg_match("/[0-9]+/", $deck[3], $num);$d_score += intval($num[0]);?>です。</p>
+        <p>ディーラーの引いたカードは<?= $deck[2]; preg_match("/[0-9]+/", $deck[2], $num) ? $d_score += intval($num[0]) : $d_score += 10; ?>です。</p>
+        <p>ディーラーの引いたカードは<?= $deck[3]; preg_match("/[0-9]+/", $deck[3], $num) ? $d_score += intval($num[0]) : $d_score += 10; ?>です。</p>
         <?php while ($d_score < 17) : ?>
-            <p>ディーラーの引いたカードは<?= $deck[$k]; preg_match("/[0-9]+/", $deck[$k], $num); $d_score += intval($num[0]); $k++;?>です。</p>
+            <p>ディーラーの引いたカードは<?= $deck[$k]; preg_match("/[0-9]+/", $deck[$k], $num) ? $d_score += intval($num[0]) : $d_score += 10; $k++;?>です。</p>
             <?php if ($d_score > 17) break; ?>
         <?php endwhile; ?>
         <?php if ($d_score > 21) : ?>
