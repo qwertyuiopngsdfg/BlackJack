@@ -9,7 +9,7 @@ foreach ($ranks as $rank) {
 }
 shuffle($deck);
 
-//write the deck in the text
+//write the deck in the csv
 $i = 0;
 do {
     $i++;

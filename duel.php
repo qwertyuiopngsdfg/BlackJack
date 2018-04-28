@@ -3,14 +3,15 @@
 $file_name = $_POST['filename'];
 $file_handler = fopen($file_name, "r");
 $deck = fgetcsv($file_handler, 1000, ",");
-$i = 0;
-$k = $_POST['draw_count']; 
+$u_score = 0;
+$d_score = 0;
+$k = $_POST['draw_count']; //現在までデッキをドローした総数;
 $k = intval($k);
-$user_input = $_POST['draw'];
-if ($user_input == 'yes') {
-    $j = $k - 3;
+$draw_confirm = $_POST['draw'];
+if ($draw_confirm == 'yes') {
+    $i = $k - 3;
 } else {
-    $j = $k - 4;
+    $i = $k - 4;
 }
 ?>
 
@@ -20,17 +21,15 @@ if ($user_input == 'yes') {
 </head>
 <body>
     <h1>BlackJack</h1>
-    <?php if ($user_input == 'no') : ?>
-        <p>あなたの引いたカードは<?= $deck[0]; preg_match("/[0-9]+/", $deck[0], $num); $u_point[0] = intval($num[0]);?>です。</p>
-        <p>あなたの引いたカードは<?= $deck[1]; preg_match("/[0-9]+/", $deck[1], $num); $u_point[1] = intval($num[0]);?>です。</p>
-        <?php $u_score = $u_point[0] + $u_point[1]; ?>
-        <?php for ($count=0; $count < $j; $count++) : ?>
+    <?php if ($draw_confirm == 'no') : ?>
+        <p>あなたの引いたカードは<?= $deck[0]; preg_match("/[0-9]+/", $deck[0], $num); $u_score += intval($num[0]);?>です。</p>
+        <p>あなたの引いたカードは<?= $deck[1]; preg_match("/[0-9]+/", $deck[1], $num); $u_score += intval($num[0]);?>です。</p>
+        <?php for ($count=0; $count < $i; $count++) : ?>
             <p>あなたの引いたカードは<?= $deck[$k]; preg_match("/[0-9]+/", $deck[$k], $num); $u_score += intval($num[0]); $k++;?>です。</p>
         <?php endfor; ?>
         <?= 'ユーザーの合計得点は' . $u_score . 'です。' ?>
-        <p>ディーラーの引いたカードは<?= $deck[2]; preg_match("/[0-9]+/", $deck[2], $num);$d_point[0] = intval($num[0]);?>です。</p>
-        <p>ディーラーの引いたカードは<?= $deck[3]; preg_match("/[0-9]+/", $deck[3], $num);$d_point[1] = intval($num[0]);?>です。</p>
-        <?php $d_score = $d_point[0] + $d_point[1]; ?>
+        <p>ディーラーの引いたカードは<?= $deck[2]; preg_match("/[0-9]+/", $deck[2], $num);$d_score += intval($num[0]);?>です。</p>
+        <p>ディーラーの引いたカードは<?= $deck[3]; preg_match("/[0-9]+/", $deck[3], $num);$d_score += intval($num[0]);?>です。</p>
         <?php while ($d_score < 17) : ?>
             <p>ディーラーの引いたカードは<?= $deck[$k]; preg_match("/[0-9]+/", $deck[$k], $num); $d_score += intval($num[0]); $k++;?>です。</p>
             <?php if ($d_score > 17) break; ?>
@@ -55,14 +54,13 @@ if ($user_input == 'yes') {
         <p>ブラックジャック終了！また遊んでね！！</p>
         <?php exit; ?>
     <?php endif; ?>
-    <p>あなたの引いたカードは<?= $deck[0]; preg_match("/[0-9]+/", $deck[0], $num); $u_point[0] = intval($num[0]);?>です。</p>
-    <p>あなたの引いたカードは<?= $deck[1]; preg_match("/[0-9]+/", $deck[1], $num); $u_point[1] = intval($num[0]);?>です。</p>
-    <?php $u_score = $u_point[0] + $u_point[1]; ?>
-    <?php for ($count=0; $count < $j; $count++) : ?>
+    <p>あなたの引いたカードは<?= $deck[0]; preg_match("/[0-9]+/", $deck[0], $num); $u_score = intval($num[0]);?>です。</p>
+    <p>あなたの引いたカードは<?= $deck[1]; preg_match("/[0-9]+/", $deck[1], $num); $u_score = intval($num[0]);?>です。</p>
+    <?php for ($count=0; $count < $i; $count++) : ?>
         <p>あなたの引いたカードは<?= $deck[$k]; preg_match("/[0-9]+/", $deck[$k], $num); $u_score += intval($num[0]); $k++;?>です。</p>
     <?php endfor; ?>
-    <p>ディーラーの引いたカードは<?= $deck[2]; preg_match("/[0-9]+/", $deck[2], $num);$d_point[0] = intval($num[0]);?>です。</p>
-    <p>ディーラーの2枚目のカードはわかりません。<?php preg_match("/[0-9]+/", $deck[3], $num);$d_point[1] = intval($num[0]); ?></p>
+    <p>ディーラーの引いたカードは<?= $deck[2];?>です。</p>
+    <p>ディーラーの2枚目のカードはわかりません。</p>
     <?= 'ユーザーの合計得点は' . $u_score . 'です。' ?>
     <?php if ($u_score > 21) : ?>
         <p>バーストしました。</p>
