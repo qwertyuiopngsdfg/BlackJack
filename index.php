@@ -2,6 +2,7 @@
 
 require_once('functions.php');
 
+//user draw
 for ($i=0; $i < 2; $i++) {
     if(strstr($deck[$i], 'A')) {
         $user_score >= 11 ? $user_score += 1 : $user_score += 11;
@@ -12,12 +13,12 @@ for ($i=0; $i < 2; $i++) {
         $user_score += 10;
     }
 }
-if ($user_score > 21 && !$user_ace = 0) {
+
+if ($user_score > 21 && !$user_ace == 0) {
     $user_score -= 10;
+    $user_ace  -= 1;
 }
-if ($user_score == 21) {
-    $message = 'ブラックジャック！！あなたの勝ちです。';
-}
+if ($user_score == 21) { $message = 'ブラックジャック！！あなたの勝ちです。'; }
 
 ?>
 <html lang="ja">
@@ -41,7 +42,7 @@ if ($user_score == 21) {
         <input type="submit">
     </form>
     <?php else : ?>
-        <p><?= $message ?></p>
+    <p><?= $message ?></p>
     <?php endif; ?>
 </body>
 </html>
