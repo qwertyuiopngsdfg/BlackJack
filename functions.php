@@ -5,6 +5,9 @@ require_once('config.php');
 foreach ($ranks as $rank) {
     foreach ($numbers as $num) {
         switch ($num) {
+            case 1:
+                $deck[] = $rank . 'のA';
+                break;
             case 11:
                 $deck[] = $rank . 'のJ';
                 break;
@@ -21,7 +24,6 @@ foreach ($ranks as $rank) {
     }
 }
 shuffle($deck);
-
 //write the deck in the csv
 $i = 0;
 do {
