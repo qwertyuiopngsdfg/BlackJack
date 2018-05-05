@@ -1,12 +1,14 @@
 <?php
 
-session_start();
+require_once('deck.class.php');
+require_once('game.class.php');
 
-require_once('functions.php');
+$cd = new CreateDeck;
+$deck = $cd->shuffleDeck();
+$game = new Game;
+$messages = $game->startGame($deck);
 
-$new_game = new NewGame;
-$deck = $new_game->CreateDeck();
-
+/*
 //user draw
 for ($i=0; $i < 2; $i++) {
     if(strstr($deck[$i], 'A')) {
@@ -24,7 +26,7 @@ if ($user_score > 21 && !$user_ace == 0) {
     $user_ace  -= 1;
 }
 if ($user_score == 21) { $message = 'ブラックジャック！！あなたの勝ちです。'; }
-
+*/
 ?>
 <html lang="ja">
 <head>
@@ -32,22 +34,16 @@ if ($user_score == 21) { $message = 'ブラックジャック！！あなたの�
 </head>
 <body>
     <h1><a href="/">Blackack</a></h1>
-    <p>あなたの引いたカードは<?= $deck[0]; ?>です。</p>
-    <p>あなたの引いたカードは<?= $deck[1]; ?>です。</p>
-    <p>ディーラーの1枚目のカードは<?= $deck[2]; ?>です。</p>
-    <p>ディーラーの2枚目のカードはわかりません。</p>
-    <p>あなたの合計得点は<?= $user_score ?>です。</p>
-    <?php if(!isset($message)) : ?>
+    <?php foreach ($messages as $msg) : ?>
+    <p><?= $msg ?></p>
+    <?php endforeach; ?>
     <p>カードをひきますか？</p>
     <form action="duel.php" method="post">
         <input type="radio" name="draw" value="yes" checked>yes
         <input type="radio" name="draw" value="no">no
-        <input type="hidden" name="filename" value="<?= $file_name ?>">
+        <input type="hidden" name="filename" value="">
         <input type="hidden" name="draw_count" value="4">
         <input type="submit">
     </form>
-    <?php else : ?>
-    <p><?= $message ?></p>
-    <?php endif; ?>
 </body>
 </html>
