@@ -1,6 +1,11 @@
 <?php
 
+session_start();
+
 require_once('functions.php');
+
+$new_game = new NewGame;
+$deck = $new_game->CreateDeck();
 
 //user draw
 for ($i=0; $i < 2; $i++) {

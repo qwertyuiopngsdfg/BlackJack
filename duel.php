@@ -5,10 +5,8 @@ require_once('config.php');
 $file_name = $_POST['filename'];
 $file_handler = fopen($file_name, "r");
 $deck = fgetcsv($file_handler, 1000, ",");
-$k = $_POST['draw_count']; //現在までデッキをドローした総数;
-$k = intval($k);
+$k = $_POST['draw_count']; 
 $draw_confirm = $_POST['draw'];
-//user draw
 for ($i = 0; $i < $k; $i++) {
     if ($i == 0 && $draw_confirm == 'no') { $k -= 2; }
     if ($i == 2) { $i = 4; }
@@ -36,7 +34,6 @@ for ($i = 0; $i < $k; $i++) {
         $i = $k;
     }
 }
-//dealer draw
 if ($draw_confirm == 'no' && !isset($message)) {
 
     for ($i = 2; $dealer_score < 17; $i++) {
