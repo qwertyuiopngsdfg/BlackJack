@@ -3,10 +3,16 @@
 require_once('deck.class.php');
 require_once('game.class.php');
 
-$cd = new CreateDeck;
-$deck = $cd->shuffleDeck();
+session_start();
+$ceatedeck = new CreateDeck;
+$_SESSION['deck'] = $ceatedeck->shuffleDeck();
 $game = new Game;
-$messages = $game->startGame($deck);
+$messages = $game->startGame();
+$_SESSION['user_hand'] = $game->firstDraw();
+array_splice($_SESSION['deck'], 0, 2);
+$_SESSION['dealer_hand'] = $game->firstDraw();
+array_splice($_SESSION['deck'], 0, 2);
+$user_points = $game->totalPoints($_SESSION['user_hand']);
 
 /*
 //user draw
@@ -37,6 +43,7 @@ if ($user_score == 21) { $message = 'ブラックジャック！！あなたの�
     <?php foreach ($messages as $msg) : ?>
     <p><?= $msg ?></p>
     <?php endforeach; ?>
+    <p>あなたの合計得点は<?= $user_points ?>です。</p>
     <p>カードをひきますか？</p>
     <form action="duel.php" method="post">
         <input type="radio" name="draw" value="yes" checked>yes
