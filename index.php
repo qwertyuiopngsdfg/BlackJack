@@ -18,7 +18,7 @@ if ($_SERVER['REQUEST_METHOD'] === 'POST') {
             $_SESSION['dealer_hand'] = $game->firstDraw();
             array_splice($_SESSION['deck'], 0, 2);
             $user_points = $game->totalPoints($_SESSION['user_hand']);
-            $judgement = $judge->blackJack($user_points, 'あなた');
+            $judgement = $judge->bustOrBlackjack($user_points, 'あなた');
             break;
         case 'draw':
             $message = $game->showCard();
@@ -27,9 +27,9 @@ if ($_SERVER['REQUEST_METHOD'] === 'POST') {
             array_push($_SESSION['user_hand'], $draw_card);
             array_splice($_SESSION['deck'], 0, 1);
             $user_points = $game->totalPoints($_SESSION['user_hand']);
+            $judgement = $judge->bustOrBlackjack($user_points, 'あなた');
             break;
         case 'stop':
-
             break;
         default :
             echo 'error';
@@ -42,26 +42,6 @@ if ($_SERVER['REQUEST_METHOD'] === 'POST') {
     exit;
 }
 
-
-/*
-//user draw
-for ($i=0; $i < 2; $i++) {
-    if(strstr($deck[$i], 'A')) {
-        $user_score >= 11 ? $user_score += 1 : $user_score += 11;
-        $user_ace += 1;
-    } elseif(preg_match("/[0-9]+/", $deck[$i], $num)) {
-        $user_score += intval($num[0]);
-    } else {
-        $user_score += 10;
-    }
-}
-
-if ($user_score > 21 && !$user_ace == 0) {
-    $user_score -= 10;
-    $user_ace  -= 1;
-}
-if ($user_score == 21) { $message = 'ブラックジャック！！あなたの勝ちです。'; }
-*/
 ?>
 <html lang="ja">
 <head>
