@@ -1,25 +1,38 @@
 <?php
 
-Class Jadgement {
+Class Jadgement 
+{
     private $__max = 21;
-    private $__message = [];
+    private $__messages = [];
     public function bustOrBlackjack($points, $name) {
         if ($points == $this->__max) {
-            $this->__message[] = 'BlackJack!!!!';
-            $this->__message[] = $name . 'の勝ちです！！';
-            $this->__message[] = "<form action='' method='post'>";
-            $this->__message[] = "<input type='submit' name='button' value='newgame'>";
-            $this->__message[] = "</form>";
-            return $this->__message;
+            $this->__messages[] = 'BlackJack!!!!';
+            $this->__messages[] = $name . 'の勝ちです！！';
+            $this->__messages[] = "<form action='' method='post'>";
+            $this->__messages[] = "<input type='submit' name='button' value='newgame'>";
+            $this->__messages[] = "</form>";
+            return $this->__messages;
         } elseif ($points > $this->__max) {
-            $this->__message[] = 'バーストしました！！';
-            $this->__message[] = $name . 'の負けです！！';
-            $this->__message[] = "<form action='' method='post'>";
-            $this->__message[] = "<input type='submit' name='button' value='newgame'>";
-            $this->__message[] = "</form>";
-            return $this->__message;
-        } else {
-            return false; 
+            $this->__messages[] = 'バーストしました！！';
+            $this->__messages[] = $name . 'の負けです！！';
+            $this->__messages[] = "<form action='' method='post'>";
+            $this->__messages[] = "<input type='submit' name='button' value='newgame'>";
+            $this->__messages[] = "</form>";
+            return $this->__messages;
         }
+    }
+
+    public function checkTheWinner($user_point, $com_point) {
+        if ($user_point == $com_point) {
+            $this->__messages[] = '引き分けです！！';
+        } elseif ($user_point > $com_point) {
+            $this->__messages[] = 'あなたの勝ちです！！';
+        } else {
+            $this->__messages[] = 'CPUの勝ちです！！';
+        }
+        $this->__messages[] = "<form action='' method='post'>";
+        $this->__messages[] = "<input type='submit' name='button' value='newgame'>";
+        $this->__messages[] = "</form>";
+        return $this->__messages;
     }
 }

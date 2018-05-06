@@ -14,12 +14,13 @@ Class Game
     public function startGame() {
         $this->_messages[] = 'あなたの引いたカードは' . $_SESSION['deck'][0] . 'です';
         $this->_messages[] = 'あなたの引いたカードは' . $_SESSION['deck'][1] . 'です';
-        $this->_messages[] = 'コンピュータの引いたカードは' . $_SESSION['deck'][2] . 'です。';
-        $this->_messages[] = 'コンピュータの2枚目に引いたカードはわかりません。';
+        $this->_messages[] = 'CPUの引いたカードは' . $_SESSION['deck'][2] . 'です。';
+        $this->_messages[] = 'CPUの2枚目に引いたカードはわかりません。';
         return $this->_messages;
     }
 
     public function firstDraw() {
+        $this->_cards = array();
         $i = 0;
         while ($i <= 1) {
             if(preg_match("/[0-9]+/", $_SESSION['deck'][$i], $num)) {
@@ -41,12 +42,13 @@ Class Game
         return $this->_card;
     }
 
-    public function showCard() {
-        $this->_message = 'あなたの引いたカードは' . $_SESSION['deck'][0] . 'です';
+    public function showCard($name) {
+        $this->_message = $name . 'の引いたカードは' . $_SESSION['deck'][0] . 'です';
         return $this->_message;
     }
 
     public function totalPoints($hand) {
+        $this->_points = 0;
         foreach ($hand as $card) {
             switch ($card) {
                 case 'J':
