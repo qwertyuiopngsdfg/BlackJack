@@ -2,14 +2,14 @@
 
 Class Game 
 {
-    public $_deck = [];
-    public $_messages = [];
-    public $_message;
-    public $_cards = [];
-    public $_card;
-    public $_points = 0;
-    public $_ace = 0;
-    public $_hand;
+    private $_deck = [];
+    private $_messages = [];
+    private $_message;
+    private $_cards = [];
+    private $_card;
+    private $_points = 0;
+    private $_ace = 0;
+    private $_hand;
 
     public function startGame() {
         $this->_messages[] = 'あなたの引いたカードは' . $_SESSION['deck'][0] . 'です';
@@ -17,20 +17,6 @@ Class Game
         $this->_messages[] = 'コンピュータの引いたカードは' . $_SESSION['deck'][2] . 'です。';
         $this->_messages[] = 'コンピュータの2枚目に引いたカードはわかりません。';
         return $this->_messages;
-        /*for ($i=0; $i<4; $i++) {
-            switch ($i) {
-                case 2 :
-                   $ _messages[] = 'コンピュータの引いたカードは' . $_SESSION['deck'][$i] . 'です。';
-                    break;
-                case 3 :
-                    $_messages[] = 'コンピュータの2枚目に引いたカードはわかりません。';
-                    break;
-                default :
-                    $_messages[] = 'あなたの引いたカードは' . $_SESSION['deck'][$i] . 'です';
-                    break;
-            }
-        }
-        */
     }
 
     public function firstDraw() {
