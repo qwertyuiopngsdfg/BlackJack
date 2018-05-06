@@ -4,7 +4,9 @@ Class Game
 {
     public $_deck = [];
     public $_messages = [];
+    public $_message;
     public $_cards = [];
+    public $_card;
     public $_points = 0;
     public $_ace = 0;
     public $_hand;
@@ -14,7 +16,6 @@ Class Game
         $this->_messages[] = 'あなたの引いたカードは' . $_SESSION['deck'][1] . 'です';
         $this->_messages[] = 'コンピュータの引いたカードは' . $_SESSION['deck'][2] . 'です。';
         $this->_messages[] = 'コンピュータの2枚目に引いたカードはわかりません。';
-        
         return $this->_messages;
         /*for ($i=0; $i<4; $i++) {
             switch ($i) {
@@ -43,6 +44,20 @@ Class Game
             $i++;
         }
         return $this->_cards;
+    }
+
+    public function nextDraw() {
+        if(preg_match("/[0-9]+/", $_SESSION['deck'][0], $num)) {
+            $this->_card = $num[0];
+        } else {
+            $this->_card = substr($_SESSION['deck'][0], -1);
+        }
+        return $this->_card;
+    }
+
+    public function showCard() {
+        $this->_message = 'あなたの引いたカードは' . $_SESSION['deck'][0] . 'です';
+        return $this->_message;
     }
 
     public function totalPoints($hand) {
