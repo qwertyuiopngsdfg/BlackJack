@@ -20,41 +20,36 @@ if ($_SERVER['REQUEST_METHOD'] === 'POST') {
             array_splice($_SESSION['deck'], 0, 2);
             $user_points = $game->totalPoints($_SESSION['user_hand']);
             $judgement = $judge->bustOrBlackjack($user_points, 'あなた');
-            $message = 'あなたの得点は:' . $user_points;
-            array_push($_SESSION['messages'], $message);
+            $_SESSION['messages'][] = 'あなたの得点は:' . $user_points;
             break;
         case 'draw':
-            $message = $game->showCard('あなた');
-            array_push($_SESSION['messages'], $message);
-            $draw_card = $game->nextDraw();
-            array_push($_SESSION['user_hand'], $draw_card);
+            $_SESSION['messages'][] = $game->showCard('あなた');
+            $_SESSION['user_hand'][] = $game->nextDraw();
             array_splice($_SESSION['deck'], 0, 1);
             $user_points = $game->totalPoints($_SESSION['user_hand']);
             $judgement = $judge->bustOrBlackjack($user_points, 'あなた');
-            $message = 'あなたの得点は:' . $user_points;
-            array_push($_SESSION['messages'], $message);
+            $_SESSION['messages'][] = 'あなたの得点は:' . $user_points;
             break;
         case 'stop':
             $user_points = $game->totalPoints($_SESSION['user_hand']);
             $cpu_points = $game->totalPoints($_SESSION['cpu_hand']);
-            $message = 'CPUの2枚目のカードは' . $_SESSION['secret_card'] . 'でした';
-            array_push($_SESSION['messages'], $message);
+            $_SESSION['messages'][] = 'CPUの2枚目のカードは' . $_SESSION['secret_card'] . 'でした';
             $judgement = $judge->bustOrBlackjack($cpu_points, 'CPU');
             if (empty($judgement) && $cpu_points < 17) {
                 for ($i=0; $cpu_points < 17; $i++) {
-                    $message = $game->showCard('CPU');
-                    $draw_card = $game->nextDraw();
-                    array_push($_SESSION['cpu_hand'], $draw_card);
-                    array_push($_SESSION['messages'], $message);
+                    $_SESSION['messages'][] = $game->showCard('CPU');
+                    $_SESSION['cpu_hand'][] = $game->nextDraw();
                     array_splice($_SESSION['deck'], 0, 1);
                     $cpu_points = $game->totalPoints($_SESSION['cpu_hand']);
                 }
-                $message = 'CPUの得点は:' . $cpu_points;
-                array_push($_SESSION['messages'], $message);
+                $_SESSION['messages'][] = 'CPUの得点は:' . $cpu_points;
                 $judgement = $judge->bustOrBlackjack($cpu_points, 'CPU');
                 if (!$judgement) {
                     $judgement = $judge->checkTheWinner($user_points, $cpu_points);
                 }
+            } else {
+                $_SESSION['messages'][] = 'CPUの得点は:' . $cpu_points;
+                $judgement = $judge->checkTheWinner($user_points, $cpu_points);
             }
             break;
         default :
