@@ -8,16 +8,11 @@ Class Jadgement
         if ($points == $this->__max) {
             $this->__messages[] = 'BlackJack!!!!';
             $this->__messages[] = $name . 'の勝ちです！！';
-            $this->__messages[] = "<form action='' method='post'>";
-            $this->__messages[] = "<input type='submit' name='button' value='newgame'>";
-            $this->__messages[] = "</form>";
-            return $this->__messages;
+            $this->__messages[] = NEWGAME;
         } elseif ($points > $this->__max) {
             $this->__messages[] = 'バーストしました！！';
             $this->__messages[] = $name . 'の負けです！！';
-            $this->__messages[] = "<form action='' method='post'>";
-            $this->__messages[] = "<input type='submit' name='button' value='newgame'>";
-            $this->__messages[] = "</form>";
+            $this->__messages[] = NEWGAME;
             return $this->__messages;
         }
     }
@@ -30,9 +25,7 @@ Class Jadgement
         } else {
             $this->__messages[] = 'CPUの勝ちです！！';
         }
-        $this->__messages[] = "<form action='' method='post'>";
-        $this->__messages[] = "<input type='submit' name='button' value='newgame'>";
-        $this->__messages[] = "</form>";
+        $this->__messages[] = NEWGAME;
         return $this->__messages;
     }
 }

@@ -1,5 +1,5 @@
 <?php
-
+define('NEWGAME', "<form action='' method='post'><input type='submit' name='button' value='newgame'></form>");
 require_once('deck.class.php');
 require_once('game.class.php');
 require_once('judgement.class.php');
@@ -12,14 +12,14 @@ if ($_SERVER['REQUEST_METHOD'] === 'POST') {
         case 'newgame':
             $ceatedeck = new CreateDeck;
             $_SESSION['deck'] = $ceatedeck->shuffleDeck();
-            $_SESSION['messages'] = $game->startGame();
-            $_SESSION['user_hand'] = $game->firstDraw();
-            array_splice($_SESSION['deck'], 0, 2);
+            $_SESSION['messages'] = $game->startGame();//ユーザー2枚。CPUも2枚ドロー　CPUの2枚目のカードは非公開にする。
+            $_SESSION['user_hand'] = $game->firstDraw(); //ユーザーが2枚ドロー、手札に加える
+            array_splice($_SESSION['deck'], 0, 2); //デッキからドローしたカードを除外する
             $_SESSION['cpu_hand'] = $game->firstDraw();
-            $_SESSION['secret_card'] = $_SESSION['deck'][1];
+            $_SESSION['secret_card'] = $_SESSION['deck'][1];//CPUが2枚目にドローした非公開のカードを保存。
             array_splice($_SESSION['deck'], 0, 2);
-            $user_points = $game->totalPoints($_SESSION['user_hand']);
-            $judgement = $judge->bustOrBlackjack($user_points, 'あなた');
+            $user_points = $game->totalPoints($_SESSION['user_hand']);//手札のカードの合計得点を算出する。
+            $judgement = $judge->bustOrBlackjack($user_points, 'あなた');//21と同点、もしくは21以上になってないか判定する。
             $_SESSION['messages'][] = 'あなたの得点は:' . $user_points;
             break;
         case 'draw':
@@ -57,9 +57,7 @@ if ($_SERVER['REQUEST_METHOD'] === 'POST') {
             exit;
     }
 } else {
-    echo "<form action='' method='post'>";
-    echo "<input type='submit' name='button' value='newgame'>";
-    echo "</form>";
+    echo NEWGAME;
     exit;
 }
 ?>
