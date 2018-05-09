@@ -3,6 +3,10 @@
 require_once('deck.class.php');
 require_once('game.class.php');
 require_once('judgement.class.php');
+define('MAXVALUE', 21);
+define('NEWGAME', "<form action='' method='post'><input type='submit' name='button' value='newgame'></form>");
+
+
 session_start();
 if ($_SERVER['REQUEST_METHOD'] === 'POST') {
     $button =$_POST['button'];
@@ -57,9 +61,7 @@ if ($_SERVER['REQUEST_METHOD'] === 'POST') {
             exit;
     }
 } else {
-    echo "<form action='' method='post'>";
-    echo "<input type='submit' name='button' value='newgame'>";
-    echo "</form>";
+    echo NEWGAME;
     exit;
 }
 ?>

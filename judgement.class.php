@@ -2,37 +2,30 @@
 
 Class Jadgement 
 {
-    private $__max = 21;
-    private $__messages = [];
+    private $_messages = [];
     public function bustOrBlackjack($points, $name) {
-        if ($points == $this->__max) {
-            $this->__messages[] = 'BlackJack!!!!';
-            $this->__messages[] = $name . 'の勝ちです！！';
-            $this->__messages[] = "<form action='' method='post'>";
-            $this->__messages[] = "<input type='submit' name='button' value='newgame'>";
-            $this->__messages[] = "</form>";
-            return $this->__messages;
-        } elseif ($points > $this->__max) {
-            $this->__messages[] = 'バーストしました！！';
-            $this->__messages[] = $name . 'の負けです！！';
-            $this->__messages[] = "<form action='' method='post'>";
-            $this->__messages[] = "<input type='submit' name='button' value='newgame'>";
-            $this->__messages[] = "</form>";
-            return $this->__messages;
+        if ($points == MAXVALUE) {
+            $this->_messages[] = 'BlackJack!!!!';
+            $this->_messages[] = $name . 'の勝ちです！！';
+            $this->_messages[] = NEWGAME;
+            return $this->_messages;
+        } elseif ($points > MAXVALUE) {
+            $this->_messages[] = 'バーストしました！！';
+            $this->_messages[] = $name . 'の負けです！！';
+            $this->_messages[] = NEWGAME;
+            return $this->_messages;
         }
     }
 
     public function checkTheWinner($user_point, $com_point) {
         if ($user_point == $com_point) {
-            $this->__messages[] = '引き分けです！！';
+            $this->_messages[] = '引き分けです！！';
         } elseif ($user_point > $com_point) {
-            $this->__messages[] = 'あなたの勝ちです！！';
+            $this->_messages[] = 'あなたの勝ちです！！';
         } else {
-            $this->__messages[] = 'CPUの勝ちです！！';
+            $this->_messages[] = 'CPUの勝ちです！！';
         }
-        $this->__messages[] = "<form action='' method='post'>";
-        $this->__messages[] = "<input type='submit' name='button' value='newgame'>";
-        $this->__messages[] = "</form>";
-        return $this->__messages;
+        $this->_messages[] = NEWGAME;
+        return $this->_messages;
     }
 }

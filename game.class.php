@@ -2,76 +2,69 @@
 
 Class Game 
 {
-    private $_deck = [];
-    private $_messages = [];
-    private $_message;
-    private $_cards = [];
-    private $_card;
-    private $_points = 0;
-    private $_ace = 0;
-    private $_hand;
-
     public function startGame() {
-        $this->_messages[] = 'あなたの引いたカードは' . $_SESSION['deck'][0] . 'です';
-        $this->_messages[] = 'あなたの引いたカードは' . $_SESSION['deck'][1] . 'です';
-        $this->_messages[] = 'CPUの引いたカードは' . $_SESSION['deck'][2] . 'です。';
-        $this->_messages[] = 'CPUの2枚目に引いたカードはわかりません。';
-        return $this->_messages;
+        $__messages = [];
+        $__messages[] = 'あなたの引いたカードは' . $_SESSION['deck'][0] . 'です';
+        $__messages[] = 'あなたの引いたカードは' . $_SESSION['deck'][1] . 'です';
+        $__messages[] = 'CPUの引いたカードは' . $_SESSION['deck'][2] . 'です。';
+        $__messages[] = 'CPUの2枚目に引いたカードはわかりません。';
+        return $__messages;
     }
 
     public function firstDraw() {
-        $this->_cards = array();
+        $__cards = [];
         $i = 0;
-        while ($i <= 1) {
+        while (1 >= $i) {
             if(preg_match("/[0-9]+/", $_SESSION['deck'][$i], $num)) {
-                $this->_cards[] = $num[0];
+                $__cards[] = $num[0];
             } else {
-                $this->_cards[] = substr($_SESSION['deck'][$i], -1);
+                $__cards[] = substr($_SESSION['deck'][$i], -1);
             }
             $i++;
         }
-        return $this->_cards;
+        return $__cards;
     }
 
     public function nextDraw() {
         if(preg_match("/[0-9]+/", $_SESSION['deck'][0], $num)) {
-            $this->_card = $num[0];
+            $__card = $num[0];
         } else {
-            $this->_card = substr($_SESSION['deck'][0], -1);
+            $__card = substr($_SESSION['deck'][0], -1);
         }
-        return $this->_card;
+        return $__card;
     }
 
     public function showCard($name) {
-        $this->_message = $name . 'の引いたカードは' . $_SESSION['deck'][0] . 'です';
-        return $this->_message;
+        $__message = $name . 'の引いたカードは' . $_SESSION['deck'][0] . 'です';
+        return $__message;
     }
 
     public function totalPoints($hand) {
-        $this->_points = 0;
+        $__points = 0;
+        $__ace = 0;
         foreach ($hand as $card) {
             switch ($card) {
                 case 'J':
-                    $this->_points += 10;
+                    $__points += 10;
                     break;
                 case 'Q':
-                    $this->_points += 10;
+                    $__points += 10;
                     break;
                 case 'K':
-                    $this->_points += 10;
+                    $__points += 10;
                     break;
                 case 'A':
-                    $this->_points += 11;
-                    $this->_ace += 1;
+                    $__points += 11;
+                    $__ace += 1;
                     break;
                 default:
-                    $this->_points += intval($card);
+                    $__points += intval($card);
                     break;
             }
         }
-        if ($this->_points > 21 && $this->_ace >= 1) {
-            $this->_points -= 10;
+        if ($__points > 21 && $__ace >= 1) {
+            $__points -= 10;
         }
-        return $this->_points;
+        return $__points;
     }
 }
