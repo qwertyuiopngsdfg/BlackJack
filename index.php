@@ -1,5 +1,4 @@
 <?php
-define('NEWGAME', "<form action='' method='post'><input type='submit' name='button' value='newgame'></form>");
 require_once('deck.class.php');
 require_once('game.class.php');
 require_once('judgement.class.php');
