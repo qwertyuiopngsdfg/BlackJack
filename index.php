@@ -3,8 +3,6 @@ require_once('deck.class.php');
 require_once('game.class.php');
 require_once('judgement.class.php');
 define('MAXVALUE', 21);
-define('NEWGAME', "<form action='' method='post'><input type='submit' name='button' value='newgame'></form>");
-
 
 session_start();
 if ($_SERVER['REQUEST_METHOD'] === 'POST') {
@@ -47,7 +45,7 @@ if ($_SERVER['REQUEST_METHOD'] === 'POST') {
                 }
                 $_SESSION['messages'][] = 'CPUの得点は:' . $cpu_points;
                 $judgement = $judge->bustOrBlackjack($cpu_points, 'CPU');
-                if (!$judgement) {
+                if (empty($judgement)) {
                     $judgement = $judge->checkTheWinner($user_points, $cpu_points);
                 }
             } else {
@@ -60,7 +58,10 @@ if ($_SERVER['REQUEST_METHOD'] === 'POST') {
             exit;
     }
 } else {
-    echo NEWGAME;
+    echo "<h2>BlackJackを始める！！</h2>";
+    echo "<form action='' method='post'>";
+    echo "<input type='submit' name='button' value='newgame'>";
+    echo "</form>";
     exit;
 }
 ?>
@@ -69,14 +70,17 @@ if ($_SERVER['REQUEST_METHOD'] === 'POST') {
     <title>BlackJack</title>
 </head>
 <body>
-    <h1>Blackack</h1>
+    <h1>BlackJack</h1>
     <?php foreach ($_SESSION['messages'] as $msg) : ?>
     <p><?= $msg ?></p>
     <?php endforeach; ?>
-    <?php if ($judgement) : ?>
+    <?php if (!empty($judgement)) : ?>
     <?php foreach ($judgement as $row) : ?>
-    <p><?= $row ?></p>
+    <p><?= $row; ?></p>
     <?php endforeach ?>
+    <form action='' method='post'>
+        <input type="submit" name='button' value='newgame'>
+    </form>
     <?php else : ?>
     <p>カードをひきますか？</p>
     <form action='' method='post'>
