@@ -13,14 +13,14 @@ if ($_SERVER['REQUEST_METHOD'] === 'POST') {
         case 'newgame':
             $ceatedeck = new CreateDeck;
             $_SESSION['deck'] = $ceatedeck->shuffleDeck();
-            $_SESSION['messages'] = $game->startGame();//ユーザー2枚。CPUも2枚ドロー　CPUの2枚目のカードは非公開にする。
-            $_SESSION['user_hand'] = $game->firstDraw(); //ユーザーが2枚ドロー、手札に加える
-            array_splice($_SESSION['deck'], 0, 2); //デッキからドローしたカードを除外する
+            $_SESSION['messages'] = $game->startGame();
+            $_SESSION['user_hand'] = $game->firstDraw(); 
+            array_splice($_SESSION['deck'], 0, 2); 
             $_SESSION['cpu_hand'] = $game->firstDraw();
-            $_SESSION['secret_card'] = $_SESSION['deck'][1];//CPUが2枚目にドローした非公開のカードを保存。
+            $_SESSION['secret_card'] = $_SESSION['deck'][1];
             array_splice($_SESSION['deck'], 0, 2);
-            $user_points = $game->totalPoints($_SESSION['user_hand']);//手札のカードの合計得点を算出する。
-            $judgement = $judge->bustOrBlackjack($user_points, 'あなた');//21と同点、もしくは21以上になってないか判定する。
+            $user_points = $game->totalPoints($_SESSION['user_hand']);
+            $judgement = $judge->bustOrBlackjack($user_points, 'あなた');
             $_SESSION['messages'][] = 'あなたの得点は:' . $user_points;
             break;
         case 'draw':
